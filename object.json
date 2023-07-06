@@ -1,0 +1,8 @@
+{
+  "key": "value",
+  "number": 100,
+  "object": {
+    "key": "value"
+  },
+  "array": ["tag1", "tag2"]
+}

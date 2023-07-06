@@ -1,0 +1,10 @@
+[
+  "Some string",
+  100,
+  1.5,
+  true,
+  false,
+  null,
+  {},
+  []
+]
