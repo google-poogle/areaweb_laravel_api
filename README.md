@@ -7,7 +7,7 @@
 
 - Что такое REST API?
 - [JSON и PHP на практике](https://github.com/somecode-pro/laravel-api-development/tree/json)
-- Как используют REST API?
+- [Как используют REST API?](https://github.com/somecode-pro/laravel-api-development/tree/how-use-rest-api)
 - Знакомство с Postman
 - GET - получение данных
 - POST - добавление данных
