@@ -6,7 +6,7 @@
 ### Занятия:
 
 - Что такое REST API?
-- JSON и PHP на практике
+- [JSON и PHP на практике](https://github.com/somecode-pro/laravel-api-development/tree/json)
 - Как используют REST API?
 - Знакомство с Postman
 - GET - получение данных
