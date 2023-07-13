@@ -43,3 +43,9 @@ docker run --rm \
 ```
 
 Приложение будет доступно по адресу `localhost:$port`, где `$port` - это значение `APP_PORT` из конфигурации.
+
+## База данных
+
+```shell
+./vendor/bin/sail artisan migrate --seed
+```
