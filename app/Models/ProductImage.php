@@ -24,6 +24,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|ProductImage wherePath($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProductImage whereProductId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProductImage whereUpdatedAt($value)
+ * @property string|null $url
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductImage whereUrl($value)
  * @mixin \Eloquent
  */
 class ProductImage extends Model

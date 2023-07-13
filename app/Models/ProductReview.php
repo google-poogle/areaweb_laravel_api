@@ -31,6 +31,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @method static \Illuminate\Database\Eloquent\Builder|ProductReview whereText($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProductReview whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProductReview whereUserId($value)
+ * @property int|null $product_id
+ * @method static \Illuminate\Database\Eloquent\Builder|ProductReview whereProductId($value)
  * @mixin \Eloquent
  */
 class ProductReview extends Model
