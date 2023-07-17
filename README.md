@@ -9,8 +9,8 @@
 - [JSON и PHP на практике](https://github.com/somecode-pro/laravel-api-development/tree/json)
 - [Как используют REST API?](https://github.com/somecode-pro/laravel-api-development/tree/how-use-rest-api)
 - Знакомство с Postman
-- Проектируем и заполняем базу данных
-- GET - получение данных
+- [Проектируем и заполняем базу данных](https://github.com/somecode-pro/laravel-api-development/tree/shop_api_migrations_and_factories)
+- [GET - получение данных](https://github.com/somecode-pro/laravel-api-development/tree/shop_api_get)
 - POST - добавление данных
 - Валидация данных
 - PUT/PATCH - изменение данных
