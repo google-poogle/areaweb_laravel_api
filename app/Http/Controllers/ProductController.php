@@ -15,7 +15,8 @@ class ProductController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->only(['store', 'update', 'review', 'destroy']);
+        $this->middleware('auth:sanctum')
+            ->only(['store', 'update', 'review', 'destroy']);
     }
 
     public function index()
