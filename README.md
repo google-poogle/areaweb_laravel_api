@@ -17,7 +17,7 @@
 - [DELETE - удаление данных](https://github.com/somecode-pro/laravel-api-development/tree/shop_api_delete)
 - [Ресурсные контроллеры](https://github.com/somecode-pro/laravel-api-development/tree/shop_api_resource_controller)
 - [Собственная реализация аутентификации по токену](https://github.com/somecode-pro/laravel-api-development/tree/shop_api_custom_auth)
-- Laravel Sanctum
+- [Laravel Sanctum](https://github.com/somecode-pro/laravel-api-development/tree/shop_api_sanctum)
 - Применение посредников (middleware)
 - Использование API ресурсов
 - Группировка и версионирование роутов
