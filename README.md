@@ -11,7 +11,7 @@
 - Знакомство с Postman
 - [Проектируем и заполняем базу данных](https://github.com/somecode-pro/laravel-api-development/tree/shop_api_migrations_and_factories)
 - [GET - получение данных](https://github.com/somecode-pro/laravel-api-development/tree/shop_api_get)
-- POST - добавление данных
+- [POST - добавление данных](https://github.com/somecode-pro/laravel-api-development/tree/shop_api_post)
 - Валидация данных
 - PUT/PATCH - изменение данных
 - DELETE - удаление данных
