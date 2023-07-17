@@ -16,7 +16,7 @@
 - [PUT/PATCH - изменение данных](https://github.com/somecode-pro/laravel-api-development/tree/shop_api_put_and_patch)
 - [DELETE - удаление данных](https://github.com/somecode-pro/laravel-api-development/tree/shop_api_delete)
 - [Ресурсные контроллеры](https://github.com/somecode-pro/laravel-api-development/tree/shop_api_resource_controller)
-- Собственная реализация аутентификации по токену
+- [Собственная реализация аутентификации по токену](https://github.com/somecode-pro/laravel-api-development/tree/shop_api_custom_auth)
 - Laravel Sanctum
 - Применение посредников (middleware)
 - Использование API ресурсов
