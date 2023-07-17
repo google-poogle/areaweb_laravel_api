@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Enums\ProductStatus;
+use App\Http\Requests\Product\StoreProductRequest;
+use App\Http\Requests\Product\StoreReviewRequest;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductReview;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
@@ -60,7 +61,7 @@ class ProductController extends Controller
         ];
     }
 
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
         /** @var Product $product */
         $product = auth()->user()->products()->create([
@@ -84,7 +85,7 @@ class ProductController extends Controller
         ], 201);
     }
 
-    public function review(Product $product, Request $request)
+    public function review(Product $product, StoreReviewRequest $request)
     {
         return $product->reviews()->create([
             'user_id' => auth()->id(),
