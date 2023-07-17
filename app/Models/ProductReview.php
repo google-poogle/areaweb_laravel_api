@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Product> $products
  * @property-read int|null $products_count
  * @property-read \App\Models\User|null $user
+ *
  * @method static \Database\Factories\ProductReviewFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|ProductReview newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ProductReview newQuery()
@@ -31,8 +32,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @method static \Illuminate\Database\Eloquent\Builder|ProductReview whereText($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProductReview whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProductReview whereUserId($value)
+ *
  * @property int|null $product_id
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|ProductReview whereProductId($value)
+ *
  * @mixin \Eloquent
  */
 class ProductReview extends Model
@@ -45,7 +49,7 @@ class ProductReview extends Model
     ];
 
     protected $casts = [
-        'rating' => 'int'
+        'rating' => 'int',
     ];
 
     public function user(): BelongsTo

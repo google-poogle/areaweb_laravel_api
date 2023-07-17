@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Product|null $product
+ *
  * @method static \Database\Factories\ProductImageFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|ProductImage newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ProductImage newQuery()
@@ -24,8 +25,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|ProductImage wherePath($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProductImage whereProductId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProductImage whereUpdatedAt($value)
+ *
  * @property string|null $url
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|ProductImage whereUrl($value)
+ *
  * @mixin \Eloquent
  */
 class ProductImage extends Model
@@ -33,7 +37,7 @@ class ProductImage extends Model
     use HasFactory;
 
     protected $fillable = [
-        'url'
+        'url',
     ];
 
     public function product(): BelongsTo

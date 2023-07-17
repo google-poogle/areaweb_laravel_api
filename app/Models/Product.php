@@ -25,6 +25,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ProductReview> $reviews
  * @property-read int|null $reviews_count
  * @property-read \App\Models\User|null $user
+ *
  * @method static \Database\Factories\ProductFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Product newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Product newQuery()
@@ -38,6 +39,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereUserId($value)
+ *
  * @mixin \Eloquent
  */
 class Product extends Model
@@ -53,7 +55,7 @@ class Product extends Model
     ];
 
     protected $casts = [
-        'status' => ProductStatus::class
+        'status' => ProductStatus::class,
     ];
 
     public function user(): BelongsTo
@@ -68,6 +70,11 @@ class Product extends Model
 
     public function images(): HasMany
     {
-        return $this->hasMany(ProductImage::class);
+        return $this->hasMany(ProductImage::class)->select('url');
+    }
+
+    public function rating(): int|float
+    {
+        return round($this->reviews->avg('rating'), 1);
     }
 }
