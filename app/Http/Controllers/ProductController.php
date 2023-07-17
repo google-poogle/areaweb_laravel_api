@@ -16,6 +16,7 @@ class ProductController extends Controller
             ->whereStatus(ProductStatus::Published)
             ->get();
 
+        // TODO: использовать API ресурсы
         return $products->map(fn (Product $product) => [
             'id' => $product->id,
             'name' => $product->name,
