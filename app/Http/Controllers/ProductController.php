@@ -133,4 +133,13 @@ class ProductController extends Controller
             $product->update($data);
         }
     }
+
+    public function destroy(Product $product)
+    {
+        $product->delete();
+
+        return response()->json([
+            'status' => 'success',
+        ]);
+    }
 }
