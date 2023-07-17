@@ -6,9 +6,18 @@ use App\Enums\ProductStatus;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductReview;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        // TODO: убрать, когда мы будем работать с авторизацией
+        auth()->login(User::query()->inRandomOrder()->whereIsAdmin(true)->first());
+    }
+
     public function index()
     {
         $products = Product::query()
@@ -49,5 +58,38 @@ class ProductController extends Controller
                 'rating' => $review->rating,
             ]),
         ];
+    }
+
+    public function store(Request $request)
+    {
+        /** @var Product $product */
+        $product = auth()->user()->products()->create([
+            'name' => $request->str('name'),
+            'description' => $request->str('description'),
+            'price' => $request->input('price'),
+            'count' => $request->integer('count'),
+            'status' => $request->enum('status', ProductStatus::class),
+        ]);
+
+        foreach ($request->file('images') as $item) {
+            $path = $item->storePublicly('images');
+
+            $product->images()->create([
+                'url' => config('app.url').Storage::url($path),
+            ]);
+        }
+
+        return response()->json([
+            'id' => $product->id,
+        ], 201);
+    }
+
+    public function review(Product $product, Request $request)
+    {
+        return $product->reviews()->create([
+            'user_id' => auth()->id(),
+            'text' => $request->str('text'),
+            'rating' => $request->integer('rating'),
+        ])->only('id');
     }
 }
