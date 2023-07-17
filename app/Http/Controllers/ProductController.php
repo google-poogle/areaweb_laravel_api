@@ -36,6 +36,30 @@ class ProductController extends Controller
         ]);
     }
 
+    public function store(StoreProductRequest $request)
+    {
+        /** @var Product $product */
+        $product = auth()->user()->products()->create([
+            'name' => $request->str('name'),
+            'description' => $request->str('description'),
+            'price' => $request->input('price'),
+            'count' => $request->integer('count'),
+            'status' => $request->enum('status', ProductStatus::class),
+        ]);
+
+        foreach ($request->file('images') as $item) {
+            $path = $item->storePublicly('images');
+
+            $product->images()->create([
+                'url' => config('app.url').Storage::url($path),
+            ]);
+        }
+
+        return response()->json([
+            'id' => $product->id,
+        ], 201);
+    }
+
     public function show(Product $product)
     {
         // TODO: перенести в middleware
@@ -62,40 +86,7 @@ class ProductController extends Controller
         ];
     }
 
-    public function store(StoreProductRequest $request)
-    {
-        /** @var Product $product */
-        $product = auth()->user()->products()->create([
-            'name' => $request->str('name'),
-            'description' => $request->str('description'),
-            'price' => $request->input('price'),
-            'count' => $request->integer('count'),
-            'status' => $request->enum('status', ProductStatus::class),
-        ]);
-
-        foreach ($request->file('images') as $item) {
-            $path = $item->storePublicly('images');
-
-            $product->images()->create([
-                'url' => config('app.url').Storage::url($path),
-            ]);
-        }
-
-        return response()->json([
-            'id' => $product->id,
-        ], 201);
-    }
-
-    public function review(Product $product, StoreReviewRequest $request)
-    {
-        return $product->reviews()->create([
-            'user_id' => auth()->id(),
-            'text' => $request->str('text'),
-            'rating' => $request->integer('rating'),
-        ])->only('id');
-    }
-
-    public function update(Product $product, UpdateProductRequest $request)
+    public function update(UpdateProductRequest $request, Product $product)
     {
         if ($request->method() === 'PUT') {
             $product->update([
@@ -141,5 +132,14 @@ class ProductController extends Controller
         return response()->json([
             'status' => 'success',
         ]);
+    }
+
+    public function review(Product $product, StoreReviewRequest $request)
+    {
+        return $product->reviews()->create([
+            'user_id' => auth()->id(),
+            'text' => $request->str('text'),
+            'rating' => $request->integer('rating'),
+        ])->only('id');
     }
 }
