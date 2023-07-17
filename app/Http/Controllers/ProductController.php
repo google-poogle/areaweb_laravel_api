@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\ProductStatus;
 use App\Http\Requests\Product\StoreProductRequest;
 use App\Http\Requests\Product\StoreReviewRequest;
+use App\Http\Requests\Product\UpdateProductRequest;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductReview;
@@ -92,5 +93,44 @@ class ProductController extends Controller
             'text' => $request->str('text'),
             'rating' => $request->integer('rating'),
         ])->only('id');
+    }
+
+    public function update(Product $product, UpdateProductRequest $request)
+    {
+        if ($request->method() === 'PUT') {
+            $product->update([
+                'name' => $request->input('name'),
+                'description' => $request->input('description'),
+                'price' => $request->input('price'),
+                'count' => $request->input('count'),
+                'status' => $request->enum('status', ProductStatus::class),
+            ]);
+        } else {
+            $data = [];
+
+            // TODO: использовать DTO
+
+            if ($request->has('name')) {
+                $data['name'] = $request->input('name');
+            }
+
+            if ($request->has('description')) {
+                $data['description'] = $request->input('description');
+            }
+
+            if ($request->has('price')) {
+                $data['price'] = $request->input('price');
+            }
+
+            if ($request->has('count')) {
+                $data['count'] = $request->input('count');
+            }
+
+            if ($request->has('status')) {
+                $data['status'] = $request->input('status');
+            }
+
+            $product->update($data);
+        }
     }
 }

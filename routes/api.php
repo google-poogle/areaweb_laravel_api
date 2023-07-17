@@ -10,4 +10,6 @@ Route::controller(ProductController::class)
         Route::get('{product}', 'show')->name('products.show');
         Route::post('', 'store')->name('products.store');
         Route::post('{product}/review', 'review')->name('products.review.store');
+        Route::put('{product}', 'update')->name('products.update');
+        Route::patch('{product}', 'update')->name('products.update');
     });
