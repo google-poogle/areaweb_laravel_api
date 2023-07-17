@@ -9,15 +9,13 @@ use App\Http\Requests\Product\UpdateProductRequest;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductReview;
-use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
     public function __construct()
     {
-        // TODO: убрать, когда мы будем работать с авторизацией
-        auth()->login(User::query()->inRandomOrder()->whereIsAdmin(true)->first());
+        $this->middleware('auth')->only(['store', 'update', 'review', 'destroy']);
     }
 
     public function index()

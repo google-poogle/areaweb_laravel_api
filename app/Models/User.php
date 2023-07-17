@@ -44,6 +44,10 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  *
+ * @property string|null $api_token
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereApiToken($value)
+ *
  * @mixin \Eloquent
  */
 class User extends Authenticatable
@@ -55,11 +59,13 @@ class User extends Authenticatable
         'email',
         'password',
         'is_admin',
+        'api_token',
     ];
 
     protected $hidden = [
         'password',
         'remember_token',
+        'api_token',
     ];
 
     protected $casts = [
