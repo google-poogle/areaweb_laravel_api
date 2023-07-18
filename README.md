@@ -20,7 +20,7 @@
 - [Laravel Sanctum](https://github.com/somecode-pro/laravel-api-development/tree/shop_api_sanctum)
 - [Применение посредников (middleware)](https://github.com/somecode-pro/laravel-api-development/tree/shop_api_middleware)
 - [Использование API ресурсов](https://github.com/somecode-pro/laravel-api-development/tree/shop_api_resources)
-- Группировка и версионирование роутов
+- [Группировка и версионирование роутов](https://github.com/somecode-pro/laravel-api-development/tree/shop_api_route_groups)
 - Postman коллекция
 - Интеграция сервисов и фасадов
 - Применение DTO (Data Transfer Object)
