@@ -17,6 +17,10 @@ class ProductController extends Controller
     {
         $this->middleware('auth:sanctum')
             ->only(['store', 'update', 'review', 'destroy']);
+
+        $this->middleware('admin')->only([
+            'store', 'update', 'destroy',
+        ]);
     }
 
     public function index()
