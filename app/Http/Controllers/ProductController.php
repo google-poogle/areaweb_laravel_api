@@ -7,6 +7,7 @@ use App\Http\Requests\Product\StoreProductRequest;
 use App\Http\Requests\Product\StoreReviewRequest;
 use App\Http\Requests\Product\UpdateProductRequest;
 use App\Http\Resources\Product\MinifiedProductResource;
+use App\Http\Resources\Product\MinifiedProductV2Resource;
 use App\Http\Resources\Product\ProductResource;
 use App\Models\Product;
 use Illuminate\Support\Facades\Storage;
@@ -33,6 +34,16 @@ class ProductController extends Controller
             ->get();
 
         return MinifiedProductResource::collection($products);
+    }
+
+    public function indexV2()
+    {
+        $products = Product::query()
+            ->select(['id', 'name', 'price'])
+            ->whereStatus(ProductStatus::Published)
+            ->get();
+
+        return MinifiedProductV2Resource::collection($products);
     }
 
     public function store(StoreProductRequest $request)
