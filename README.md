@@ -24,7 +24,7 @@
 - Postman коллекция
 - [Интеграция сервисов и фасадов](https://github.com/somecode-pro/laravel-api-development/tree/shop_api_services_and_facades)
 - [Применение DTO (Data Transfer Object)](https://github.com/somecode-pro/laravel-api-development/tree/shop_api_dto)
-- Обработка исключений и кодов ошибок
+- [Обработка исключений и кодов ошибок](https://github.com/somecode-pro/laravel-api-development/tree/shop_api_exceptions)
 - Тестирование GET запросов
 - Тестирование POST/PUT/PATCH запросов
 - Тестирование DELETE запросов
