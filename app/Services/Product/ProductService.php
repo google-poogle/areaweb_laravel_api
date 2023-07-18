@@ -3,12 +3,13 @@
 namespace App\Services\Product;
 
 use App\Enums\ProductStatus;
-use App\Http\Requests\Product\StoreProductRequest;
 use App\Http\Requests\Product\StoreReviewRequest;
 use App\Http\Requests\Product\UpdateProductRequest;
 use App\Models\Product;
 use App\Models\ProductReview;
+use App\Services\Product\DTO\CreateProductData;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 
 class ProductService
@@ -23,23 +24,23 @@ class ProductService
             ->get();
     }
 
-    public function store(StoreProductRequest $request): Product
+    public function store(CreateProductData $data): Product
     {
+        $images = Arr::get($data->toArray(), 'images');
+
         /** @var Product $product */
-        $product = auth()->user()->products()->create([
-            'name' => $request->str('name'),
-            'description' => $request->str('description'),
-            'price' => $request->input('price'),
-            'count' => $request->integer('count'),
-            'status' => $request->enum('status', ProductStatus::class),
-        ]);
+        $product = auth()->user()->products()->create(
+            $data->except('images')->toArray()
+        );
 
-        foreach ($request->file('images') as $item) {
-            $path = $item->storePublicly('images');
+        if (! empty($images)) {
+            foreach ($images as $image) {
+                $path = $image->storePublicly('images');
 
-            $product->images()->create([
-                'url' => config('app.url').Storage::url($path),
-            ]);
+                $product->images()->create([
+                    'url' => config('app.url').Storage::url($path),
+                ]);
+            }
         }
 
         return $product;

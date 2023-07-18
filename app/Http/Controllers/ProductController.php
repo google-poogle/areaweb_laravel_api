@@ -42,7 +42,9 @@ class ProductController extends Controller
 
     public function store(StoreProductRequest $request)
     {
-        return new ProductResource(ProductFacade::store($request));
+        return new ProductResource(
+            ProductFacade::store($request->data())
+        );
     }
 
     public function show(Product $product)
