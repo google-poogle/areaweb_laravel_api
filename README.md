@@ -23,7 +23,7 @@
 - [Группировка и версионирование роутов](https://github.com/somecode-pro/laravel-api-development/tree/shop_api_route_groups)
 - Postman коллекция
 - [Интеграция сервисов и фасадов](https://github.com/somecode-pro/laravel-api-development/tree/shop_api_services_and_facades)
-- Применение DTO (Data Transfer Object)
+- [Применение DTO (Data Transfer Object)](https://github.com/somecode-pro/laravel-api-development/tree/shop_api_dto)
 - Обработка исключений и кодов ошибок
 - Тестирование GET запросов
 - Тестирование POST/PUT/PATCH запросов
