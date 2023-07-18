@@ -78,6 +78,13 @@ class Product extends Model
         return round($this->reviews->avg('rating'), 1);
     }
 
+    public function imagesList(): array
+    {
+        return $this->images
+            ->map(fn (ProductImage $image) => $image->url)
+            ->toArray();
+    }
+
     public function isDraft(): bool
     {
         return $this->status === ProductStatus::Draft;
