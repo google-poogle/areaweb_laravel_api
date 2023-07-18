@@ -21,6 +21,8 @@ class ProductController extends Controller
         $this->middleware('admin')->only([
             'store', 'update', 'destroy',
         ]);
+
+        $this->middleware('product.draft')->only('show');
     }
 
     public function index()
@@ -65,13 +67,6 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        // TODO: перенести в middleware
-        if ($product->status === ProductStatus::Draft) {
-            return response()->json([
-                'message' => 'Product not found',
-            ], 404);
-        }
-
         return [
             'id' => $product->id,
             'name' => $product->name,

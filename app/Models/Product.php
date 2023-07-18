@@ -77,4 +77,9 @@ class Product extends Model
     {
         return round($this->reviews->avg('rating'), 1);
     }
+
+    public function isDraft(): bool
+    {
+        return $this->status === ProductStatus::Draft;
+    }
 }
