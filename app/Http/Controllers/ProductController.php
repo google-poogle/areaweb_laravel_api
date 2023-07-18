@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\ProductStatus;
+use App\Facades\Product as ProductFacade;
 use App\Http\Requests\Product\StoreProductRequest;
 use App\Http\Requests\Product\StoreReviewRequest;
 use App\Http\Requests\Product\UpdateProductRequest;
 use App\Http\Resources\Product\MinifiedProductResource;
 use App\Http\Resources\Product\MinifiedProductV2Resource;
 use App\Http\Resources\Product\ProductResource;
+use App\Http\Resources\Product\ProductReviewResource;
 use App\Models\Product;
-use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -28,46 +28,21 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::query()
-            ->select(['id', 'name', 'price'])
-            ->whereStatus(ProductStatus::Published)
-            ->get();
-
-        return MinifiedProductResource::collection($products);
+        return MinifiedProductResource::collection(
+            ProductFacade::published()
+        );
     }
 
     public function indexV2()
     {
-        $products = Product::query()
-            ->select(['id', 'name', 'price'])
-            ->whereStatus(ProductStatus::Published)
-            ->get();
-
-        return MinifiedProductV2Resource::collection($products);
+        return MinifiedProductV2Resource::collection(
+            ProductFacade::published()
+        );
     }
 
     public function store(StoreProductRequest $request)
     {
-        /** @var Product $product */
-        $product = auth()->user()->products()->create([
-            'name' => $request->str('name'),
-            'description' => $request->str('description'),
-            'price' => $request->input('price'),
-            'count' => $request->integer('count'),
-            'status' => $request->enum('status', ProductStatus::class),
-        ]);
-
-        foreach ($request->file('images') as $item) {
-            $path = $item->storePublicly('images');
-
-            $product->images()->create([
-                'url' => config('app.url').Storage::url($path),
-            ]);
-        }
-
-        return response()->json([
-            'id' => $product->id,
-        ], 201);
+        return new ProductResource(ProductFacade::store($request));
     }
 
     public function show(Product $product)
@@ -77,58 +52,23 @@ class ProductController extends Controller
 
     public function update(UpdateProductRequest $request, Product $product)
     {
-        if ($request->method() === 'PUT') {
-            $product->update([
-                'name' => $request->input('name'),
-                'description' => $request->input('description'),
-                'price' => $request->input('price'),
-                'count' => $request->input('count'),
-                'status' => $request->enum('status', ProductStatus::class),
-            ]);
-        } else {
-            $data = [];
+        $product = ProductFacade::setProduct($product)
+            ->update($request);
 
-            // TODO: использовать DTO
-
-            if ($request->has('name')) {
-                $data['name'] = $request->input('name');
-            }
-
-            if ($request->has('description')) {
-                $data['description'] = $request->input('description');
-            }
-
-            if ($request->has('price')) {
-                $data['price'] = $request->input('price');
-            }
-
-            if ($request->has('count')) {
-                $data['count'] = $request->input('count');
-            }
-
-            if ($request->has('status')) {
-                $data['status'] = $request->input('status');
-            }
-
-            $product->update($data);
-        }
+        return new ProductResource($product);
     }
 
     public function destroy(Product $product)
     {
         $product->delete();
 
-        return response()->json([
-            'status' => 'success',
-        ]);
+        return responseOk();
     }
 
     public function review(Product $product, StoreReviewRequest $request)
     {
-        return $product->reviews()->create([
-            'user_id' => auth()->id(),
-            'text' => $request->str('text'),
-            'rating' => $request->integer('rating'),
-        ])->only('id');
+        return new ProductReviewResource(
+            ProductFacade::setProduct($product)->addReview($request)
+        );
     }
 }
