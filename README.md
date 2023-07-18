@@ -25,5 +25,5 @@
 - [Интеграция сервисов и фасадов](https://github.com/somecode-pro/laravel-api-development/tree/shop_api_services_and_facades)
 - [Применение DTO (Data Transfer Object)](https://github.com/somecode-pro/laravel-api-development/tree/shop_api_dto)
 - [Обработка исключений и кодов ошибок](https://github.com/somecode-pro/laravel-api-development/tree/shop_api_exceptions)
-- Тестирование API запросов
+- [Тестирование API запросов](https://github.com/somecode-pro/laravel-api-development/tree/shop_api_testing)
 - Пишем API для аналога 'Instagram'

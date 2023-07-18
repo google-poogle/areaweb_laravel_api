@@ -4,3 +4,5 @@ storage
 vendor
 .env
 public
+.env.testing
+.phpunit.result.cache
