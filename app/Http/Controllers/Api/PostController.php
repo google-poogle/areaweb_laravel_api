@@ -47,4 +47,11 @@ class PostController extends Controller
 
         return response()->noContent();
     }
+
+    public function like(PostModel $post)
+    {
+        return response()->json([
+            'state' => $post->like(),
+        ]);
+    }
 }

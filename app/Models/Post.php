@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\LikeState;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -76,5 +77,25 @@ class Post extends Model
             ->wherePostId($this->id)
             ->whereUserId(auth()->id())
             ->exists();
+    }
+
+    public function like(): LikeState
+    {
+        $like = Like::query()
+            ->wherePostId($this->id)
+            ->whereUserId(auth()->id())
+            ->first();
+
+        if (is_null($like)) {
+            $this->likes()->create([
+                'user_id' => auth()->id(),
+            ]);
+
+            return LikeState::Liked;
+        }
+
+        $like->delete();
+
+        return LikeState::Unliked;
     }
 }
