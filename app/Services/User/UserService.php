@@ -7,6 +7,7 @@ use App\Http\Resources\User\CurrentUserResource;
 use App\Models\User;
 use App\Services\User\Data\LoginData;
 use App\Services\User\Data\RegisterUserData;
+use App\Services\User\Data\UpdateUserData;
 use Illuminate\Http\UploadedFile;
 use Laravel\Sanctum\NewAccessToken;
 
@@ -43,6 +44,13 @@ class UserService
         auth()->user()->update([
             'avatar' => $url,
         ]);
+
+        return auth()->user();
+    }
+
+    public function update(UpdateUserData $data): User
+    {
+        auth()->user()->update($data->toArray());
 
         return auth()->user();
     }
