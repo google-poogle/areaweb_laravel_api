@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use App\Exceptions\User\InvalidUserCredentialsException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
@@ -34,6 +35,12 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $e)
     {
+        if ($e instanceof ModelNotFoundException) {
+            return responseFailed(
+                getModelNotFoundMessage($e->getModel()), 404
+            );
+        }
+
         $this->renderable(function (NotFoundHttpException $e) {
             return responseFailed($e->getMessage(), 404);
         });

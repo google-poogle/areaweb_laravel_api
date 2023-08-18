@@ -105,4 +105,12 @@ class User extends Authenticatable
     {
         return $this->posts->count();
     }
+
+    public function isSubscribed(): bool
+    {
+        return Subscription::query()
+            ->whereUserId($this->id)
+            ->whereSubscriberId(auth()->id())
+            ->exists();
+    }
 }

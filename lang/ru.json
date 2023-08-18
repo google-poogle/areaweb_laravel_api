@@ -1,4 +1,6 @@
 {
   "Bad request": "Неверный запрос",
-  "Invalid user credentials": "Неверный логин или пароль"
+  "Invalid user credentials": "Неверный логин или пароль",
+  "User not found": "Пользователь не найден",
+  "Entity not found": "Элемент не найден"
 }
