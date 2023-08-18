@@ -93,7 +93,7 @@ class User extends Authenticatable
 
     public function subscriptions(): HasMany
     {
-        return $this->hasMany(Subscription::class);
+        return $this->hasMany(Subscription::class)->with('subscriber');
     }
 
     public function subscriptionsCount(): int

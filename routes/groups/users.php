@@ -9,4 +9,7 @@ Route::controller(UserController::class)
     ->group(function () {
         Route::get('/{user}', 'getUser')
             ->name('get-user');
+
+        Route::get('/{user}/subscribers', 'subscribers')
+            ->name('subscribers');
     });
