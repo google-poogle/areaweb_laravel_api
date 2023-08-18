@@ -6,6 +6,7 @@ namespace App\Models;
 use App\Enums\SubscribeState;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -54,6 +55,9 @@ use Laravel\Sanctum\HasApiTokens;
  *
  * @method static \Illuminate\Database\Eloquent\Builder|User whereAbout($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereIsVerified($value)
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Post> $feedPosts
+ * @property-read int|null $feed_posts_count
  *
  * @mixin \Eloquent
  */
@@ -135,5 +139,17 @@ class User extends Authenticatable
         $subscription->delete();
 
         return SubscribeState::Unsubscribed;
+    }
+
+    public function feedPosts(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            Post::class,
+            Subscription::class,
+            'subscriber_id',
+            'user_id',
+            'id',
+            'user_id'
+        );
     }
 }

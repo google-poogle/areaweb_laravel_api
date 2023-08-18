@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Facade;
 /**
  * @method static \App\Models\Post store(\App\Services\Post\Data\StorePostData $data)
  * @method static \App\Models\Post update(\App\Models\Post $post, \App\Services\Post\Data\UpdatePostData $data)
+ * @method static \Illuminate\Database\Eloquent\Collection feed(int $limit = 10, int $offset = 0)
+ * @method static int  totalFeedPosts()
  *
  * @see \App\Services\User\UserService
  */

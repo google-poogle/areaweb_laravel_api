@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Api;
 use App\Facades\Post;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\AddCommentRequest;
+use App\Http\Requests\Post\GetPostsRequest;
 use App\Http\Requests\Post\StorePostRequest;
 use App\Http\Requests\Post\UpdatePostRequest;
 use App\Http\Resources\Comment\CommentResource;
+use App\Http\Resources\Post\FeedPostResource;
 use App\Http\Resources\Post\PostResource;
 use App\Models\Post as PostModel;
 
@@ -19,9 +21,14 @@ class PostController extends Controller
             ->only('destroy');
     }
 
-    public function index()
+    public function index(GetPostsRequest $request)
     {
-
+        return response()->json([
+            'posts' => FeedPostResource::collection(
+                Post::feed($request->limit(), $request->offset())
+            ),
+            'total' => Post::totalFeedPosts(),
+        ]);
     }
 
     public function store(StorePostRequest $request)
