@@ -13,5 +13,6 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
 
     Route::controller(UserController::class)->group(function () {
         Route::get('/', 'user')->name('current');
+        Route::post('avatar', 'avatar')->name('avatar');
     });
 });

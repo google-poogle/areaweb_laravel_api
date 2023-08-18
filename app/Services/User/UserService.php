@@ -7,6 +7,7 @@ use App\Http\Resources\User\CurrentUserResource;
 use App\Models\User;
 use App\Services\User\Data\LoginData;
 use App\Services\User\Data\RegisterUserData;
+use Illuminate\Http\UploadedFile;
 use Laravel\Sanctum\NewAccessToken;
 
 class UserService
@@ -31,5 +32,18 @@ class UserService
         $token = auth()->user()->createToken('api_login');
 
         return ['token' => $token->plainTextToken];
+    }
+
+    public function updateAvatar(UploadedFile $avatar): User
+    {
+        $path = $avatar->storePublicly('avatars');
+
+        $url = config('app.url')."/storage/$path";
+
+        auth()->user()->update([
+            'avatar' => $url,
+        ]);
+
+        return auth()->user();
     }
 }

@@ -18,8 +18,18 @@ abstract class TestCase extends BaseTestCase
 
         $this->withHeader('Accept', 'application/json');
 
-        $this->user = User::factory()->create();
+        $this->user = User::factory()->create(['avatar' => null]);
 
         Sanctum::actingAs($this->user);
+    }
+
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
+    public function getUserId(): int
+    {
+        return $this->user->id;
     }
 }
