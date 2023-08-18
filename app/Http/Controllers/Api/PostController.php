@@ -25,7 +25,7 @@ class PostController extends Controller
 
     public function show(PostModel $post)
     {
-        //
+        return new PostResource($post);
     }
 
     public function update(Request $request, PostModel $post)
