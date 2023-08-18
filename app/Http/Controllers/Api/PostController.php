@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Facades\Post;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\StorePostRequest;
+use App\Http\Requests\Post\UpdatePostRequest;
 use App\Http\Resources\Post\PostResource;
 use App\Models\Post as PostModel;
-use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -34,9 +34,11 @@ class PostController extends Controller
         return new PostResource($post);
     }
 
-    public function update(Request $request, PostModel $post)
+    public function update(UpdatePostRequest $request, PostModel $post)
     {
-        //
+        return new PostResource(
+            Post::update($post, $request->data())
+        );
     }
 
     public function destroy(PostModel $post)
