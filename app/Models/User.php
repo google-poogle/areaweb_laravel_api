@@ -152,4 +152,9 @@ class User extends Authenticatable
             'user_id'
         );
     }
+
+    public function totalPosts(): int
+    {
+        return $this->posts()->count();
+    }
 }

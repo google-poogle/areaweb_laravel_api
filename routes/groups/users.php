@@ -13,4 +13,6 @@ Route::controller(UserController::class)
             ->name('subscribers');
         Route::post('/{user}/subscribe', 'subscribe')
             ->name('subscribe');
+        Route::get('/{user}/posts', 'posts')
+            ->name('posts');
     });
