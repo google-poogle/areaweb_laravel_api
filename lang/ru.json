@@ -1,3 +1,4 @@
 {
-  "Bad request": "Неверный запрос"
+  "Bad request": "Неверный запрос",
+  "Invalid user credentials": "Неверный логин или пароль"
 }
