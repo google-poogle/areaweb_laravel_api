@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\Resources\Comment\CommentResource;
 use App\Http\Resources\Post\PostResource;
 use App\Http\Resources\User\CurrentUserResource;
 use App\Services\Post\PostService;
@@ -26,5 +27,6 @@ class AppServiceProvider extends ServiceProvider
     {
         CurrentUserResource::withoutWrapping();
         PostResource::withoutWrapping();
+        CommentResource::withoutWrapping();
     }
 }

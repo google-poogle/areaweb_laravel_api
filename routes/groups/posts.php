@@ -11,4 +11,6 @@ Route::controller(PostController::class)
     ->group(function () {
         Route::post('{post}/list', 'like')
             ->name('like');
+        Route::post('{post}/comment', 'addComment')
+            ->name('comment');
     });
