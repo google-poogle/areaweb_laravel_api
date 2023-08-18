@@ -11,6 +11,12 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('post.access')
+            ->only('destroy');
+    }
+
     public function index()
     {
 
@@ -35,6 +41,8 @@ class PostController extends Controller
 
     public function destroy(PostModel $post)
     {
-        //
+        $post->delete();
+
+        return response()->noContent();
     }
 }
