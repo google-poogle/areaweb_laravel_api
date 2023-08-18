@@ -55,8 +55,26 @@ class Post extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function totalComments(): int
+    {
+        return $this->comments->count();
+    }
+
     public function likes(): HasMany
     {
         return $this->hasMany(Like::class);
+    }
+
+    public function totalLikes(): int
+    {
+        return $this->likes->count();
+    }
+
+    public function isLiked(): bool
+    {
+        return Like::query()
+            ->wherePostId($this->id)
+            ->whereUserId(auth()->id())
+            ->exists();
     }
 }

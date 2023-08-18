@@ -37,12 +37,8 @@ class UserService
 
     public function updateAvatar(UploadedFile $avatar): User
     {
-        $path = $avatar->storePublicly('avatars');
-
-        $url = config('app.url')."/storage/$path";
-
         auth()->user()->update([
-            'avatar' => $url,
+            'avatar' => uploadImage($avatar),
         ]);
 
         return auth()->user();
