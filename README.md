@@ -26,4 +26,4 @@
 - [Применение DTO (Data Transfer Object)](https://github.com/somecode-pro/laravel-api-development/tree/shop_api_dto)
 - [Обработка исключений и кодов ошибок](https://github.com/somecode-pro/laravel-api-development/tree/shop_api_exceptions)
 - [Тестирование API запросов](https://github.com/somecode-pro/laravel-api-development/tree/shop_api_testing)
-- Пишем API для аналога 'Instagram'
+- [Пишем API для аналога 'Instagram'](https://github.com/somecode-pro/laravel-api-development/tree/instaboom-api)
